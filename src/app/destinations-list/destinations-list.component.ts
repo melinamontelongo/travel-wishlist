@@ -11,8 +11,12 @@ export class DestinationsListComponent {
   constructor(){
     this.destinations = []
   }
-  save(name:string, url:string, description:string):boolean{
+  save(name: string, url: string, description: string): boolean{
     this.destinations.push(new TravelDestination(name, url, description))
     return false;
+  }
+  chosen(d: TravelDestination){
+    this.destinations.forEach(x => x.setSelected(false));
+    d.setSelected(true);
   }
 }

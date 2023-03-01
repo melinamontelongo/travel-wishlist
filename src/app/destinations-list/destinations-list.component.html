@@ -29,6 +29,9 @@
     </div>
     <hr class="mb-5">
     <div class="row row-flex">
-        <app-travel-destination *ngFor="let d of destinations" [destination]="d"></app-travel-destination>
+        <app-travel-destination 
+        *ngFor="let d of destinations; let i=index" [destination]="d"
+        [position]="i+1"
+        (clicked)="chosen(d)"></app-travel-destination>
     </div>
 </div>

@@ -1,8 +1,24 @@
-<div class="card card-content" style="width: 18rem;">
-    <img src="https://placeimg.com/380/230/nature" class="card-img card-img-top" alt="...">
+<div class=" card-content" style="width: 18rem;">
+    <div class="card-img">
+        <img src="https://placeimg.com/380/230/nature" class="" alt="...">
+        <span><h4>{{position}}</h4></span>
+    </div>
     <div class="card-desc card-body">
         <h5 class="card-title">{{destination.name}}</h5>
         <p class="card-text">{{destination.description}}</p>
-        <a href="#" class="btn-card">Go somewhere</a>
+        <p>Services: </p>
+        <ul>
+            <li *ngFor="let s of destination.services">
+                <span [ngSwitch]="s">
+                    <i *ngSwitchCase="'Lunch'"style="color:red">{{s}}</i>
+                    <i *ngSwitchDefault>{{s}}</i>
+                </span>
+            </li>
+        </ul>
+        <a href="#" class="btn-card" (click)="go()">Go!</a>
+        <span *ngIf="destination.isSelected()">
+            <span ngNonBindable>-FAVORITE-</span>
+        </span>
+        <a [routerLink]="['/destination']" class="btn-card">See details</a>
     </div>
 </div>
