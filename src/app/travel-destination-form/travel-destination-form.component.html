@@ -1,0 +1,21 @@
+<form [formGroup]="fg" (ngSubmit)="save(fg.controls['name'].value, fg.controls['url'].value, fg.controls['description'].value)">
+    <div class="form-group mb-2">
+        <label class="form-label" for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter a place name..."
+            [formControl]="$any(fg.controls['name'])">
+            <div *ngIf="fg.controls['name'].hasError('required')">Name is required</div>
+            <div *ngIf="fg.controls['name'].hasError('invalidName')">Invalid name</div>
+            <div *ngIf="fg.controls['name'].hasError('minLengthName')">Name must have at least {{minLength}} characters</div>
+    </div>
+    <div class="form-group mb-2">
+        <label class="form-label" for="url">Image URL</label>
+        <input type="text" class="form-control" id="url" placeholder="Enter an image URL..."
+            [formControl]="$any(fg.controls['url'])">
+    </div>
+    <div class="form-group mb-2">
+        <label class="form-label" for="description">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="3"
+            [formControl]="$any(fg.controls['description'])"></textarea>
+    </div>
+    <button type="submit" class="btn-card mt-3" *ngIf="fg.valid">Save</button>
+</form>

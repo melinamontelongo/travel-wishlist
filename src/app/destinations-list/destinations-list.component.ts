@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { TravelDestination } from "../models/travel-destination.model";
+import { DestinationsApiClient } from './../models/destinations-api-client.model';
 
 @Component({
   selector: 'app-destinations-list',
@@ -7,16 +8,16 @@ import { TravelDestination } from "../models/travel-destination.model";
   styleUrls: ['./destinations-list.component.css']
 })
 export class DestinationsListComponent {
-  destinations: TravelDestination[];
-  constructor(){
-    this.destinations = []
+  @Output() onItemAdded:EventEmitter<TravelDestination>;
+  constructor(public destinationsApiClient: DestinationsApiClient){
+    this.onItemAdded = new EventEmitter();
   }
-  save(name: string, url: string, description: string): boolean{
-    this.destinations.push(new TravelDestination(name, url, description))
-    return false;
+  added(d: TravelDestination) {
+    this.destinationsApiClient.add(d);
+    this.onItemAdded.emit(d);
   }
-  chosen(d: TravelDestination){
-    this.destinations.forEach(x => x.setSelected(false));
-    d.setSelected(true);
+  chosen(c: TravelDestination){
+    this.destinationsApiClient.getAll().forEach(x => x.setSelected(false));
+    c.setSelected(true);
   }
 }

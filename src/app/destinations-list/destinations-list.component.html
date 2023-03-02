@@ -2,27 +2,13 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <span class="anchor" id="formLogin"></span>
-            <!-- form card login with validation	feedback -->
+            <!-- form card login with validation feedback -->
             <div class="card card-outline-secondary">
                 <div class="card-header">
                     <h3 class="mb-0">Wishlist</h3>
                 </div>
                 <div class="card-body">
-                    <form>
-                        <div class="form-group mb-2">
-                            <label  class="form-label" for="name">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter a place name..." #name>
-                        </div>
-                        <div class="form-group mb-2">
-                            <label  class="form-label" for="url">Image URL</label>
-                            <input type="text" class="form-control" id="url" placeholder="Enter an image URL..." #url>
-                        </div>
-                        <div class="form-group mb-2">
-                            <label class="form-label" for="description">Description</label>
-                            <textarea class="form-control" name="description" id="description" rows="3" #description></textarea>
-                        </div>
-                        <button type="submit" class="btn-card mt-3" (click)="save(name.value, url.value, description.value)">Save</button>
-                    </form>
+                    <app-travel-destination-form (onItemAdded)="added($event)"></app-travel-destination-form>
                 </div>
             </div>
         </div>
@@ -30,7 +16,7 @@
     <hr class="mb-5">
     <div class="row row-flex">
         <app-travel-destination 
-        *ngFor="let d of destinations; let i=index" [destination]="d"
+        *ngFor="let d of destinationsApiClient.getAll(); let i=index" [destination]="d"
         [position]="i+1"
         (clicked)="chosen(d)"></app-travel-destination>
     </div>
