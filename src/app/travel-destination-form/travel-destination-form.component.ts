@@ -16,7 +16,7 @@ export class TravelDestinationFormComponent implements OnInit{
     this.fg = fb.group({
       name: ['', Validators.compose([
         Validators.required,
-        this.nameValidator
+        this.nameValidatorParams(this.minLength)
       ])],
       url: [''],
       description: ['', Validators.required]
@@ -42,7 +42,7 @@ export class TravelDestinationFormComponent implements OnInit{
     }
     return null;
   }
-  nameValidatorParams(minLength: number): ValidatorFn { /* ver error */
+  nameValidatorParams(minLength: number): ValidatorFn { 
     return (control: AbstractControl): ValidationErrors | null => {
       let controlLength = control.value.toString().trim().length;
       if(controlLength > 0 && controlLength < minLength){
