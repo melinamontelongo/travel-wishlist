@@ -3,6 +3,9 @@
         <label class="form-label" for="name">Name</label>
         <input type="text" class="form-control" id="name" placeholder="Enter a place name..."
             [formControl]="$any(fg.controls['name'])">
+            <ul>
+                <li *ngFor="let r of searchResults;">{{r}}</li>
+            </ul>
             <div *ngIf="fg.controls['name'].hasError('required')">Name is required</div>
             <div *ngIf="fg.controls['name'].hasError('invalidName')">Invalid name</div>
             <div *ngIf="fg.controls['name'].hasError('minLengthName')">Name must have at least {{minLength}} characters</div>
