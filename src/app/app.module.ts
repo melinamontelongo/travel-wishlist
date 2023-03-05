@@ -8,7 +8,7 @@ import { TravelDestinationComponent } from './components/travel-destination/trav
 import { DestinationsListComponent } from './components/destinations-list/destinations-list.component';
 import { DestinationDetailComponent } from './components/destination-detail/destination-detail.component';
 import { TravelDestinationFormComponent } from './components/travel-destination-form/travel-destination-form.component';
-import { DestinationsApiClient } from './models/destinations-api-client.model';
+/* import { DestinationsApiClient } from './models/destinations-api-client.model'; */
 import { initializeTravelDestinationState, TravelDestinationEffects, TravelDestinationReducer, TravelDestinationState } from './models/travel-destination-state.model';
 import { ActionReducerMap, StoreModule as NgRxStoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
@@ -80,7 +80,7 @@ const reducersInitialState = {
     BookingsModule
   ],
   providers: [
-    DestinationsApiClient,
+    /* DestinationsApiClient, */
     AuthService,
     LoggedUserGuard
   ],

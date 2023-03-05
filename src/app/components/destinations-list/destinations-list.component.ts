@@ -7,7 +7,8 @@ import { AppState } from '../../app.module';
 @Component({
   selector: 'app-destinations-list',
   templateUrl: './destinations-list.component.html',
-  styleUrls: ['./destinations-list.component.css']
+  styleUrls: ['./destinations-list.component.css'],
+  providers: [DestinationsApiClient]
 })
 export class DestinationsListComponent {
   @Output() onItemAdded:EventEmitter<TravelDestination>;

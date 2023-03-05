@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BookingsApiClientService } from '../bookings-api-client.service';
 
 @Component({
   selector: 'app-bookings-list',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./bookings-list.component.css']
 })
 export class BookingsListComponent {
-
+  constructor(public api: BookingsApiClientService){}
 }

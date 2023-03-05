@@ -14,4 +14,7 @@ export class DestinationsApiClient {
 	choose(d: TravelDestination){
 		this.store.dispatch(new ChosenTravelDestinationAction(d))
 	}
+	getById(id: string): any{
+		return false;
+	}
 }
