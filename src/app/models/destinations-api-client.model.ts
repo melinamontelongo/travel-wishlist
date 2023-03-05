@@ -1,27 +1,17 @@
 import { TravelDestination } from './travel-destination.model';
 import { Subject, BehaviorSubject } from "rxjs";
+import { Store } from '@ngrx/store';
+import { AppState } from '../app.module';
+import { ChosenTravelDestinationAction, NewTravelDestinationAction } from './travel-destination-state.model';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class DestinationsApiClient {
-	destinations: TravelDestination[];
-	current: Subject<TravelDestination> = new BehaviorSubject<TravelDestination>(new TravelDestination("","", ""));
- 	constructor() {
-       this.destinations = [];
-	}
+	constructor(private store: Store<AppState>) {}
 	add(d: TravelDestination){
-	  this.destinations.push(d);
-	}
-	getAll(){
-	  return this.destinations;
-    }
-	getById(id: string): TravelDestination{
-		return this.destinations.filter((d) => d.id.toString() === id)[0]
+	 	this.store.dispatch(new NewTravelDestinationAction(d))
 	}
 	choose(d: TravelDestination){
-		this.destinations.forEach(x => x.setSelected(false));
-		d.setSelected(true);
-		this.current.next(d);
-	}
-	subscribeOnChange(fn:any){
-		this.current.subscribe(fn)
+		this.store.dispatch(new ChosenTravelDestinationAction(d))
 	}
 }

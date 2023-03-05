@@ -12,6 +12,8 @@ import { AppState } from '../app.module';
 export class DestinationsListComponent {
   @Output() onItemAdded:EventEmitter<TravelDestination>;
   updates: string[];
+  all;
+
   constructor(public destinationsApiClient: DestinationsApiClient, private store: Store<AppState>){
     this.onItemAdded = new EventEmitter();
     this.updates = [];
@@ -20,15 +22,14 @@ export class DestinationsListComponent {
         if( d != null){
           this.updates.push("Se ha elegido a " + d.name);
         }
-      })
+      });
+      this.all = store.select(state => state.destinations.items).subscribe(items => this.all = items);
   }
   added(d: TravelDestination) {
     this.destinationsApiClient.add(d);
     this.onItemAdded.emit(d);
-    this.store.dispatch(new NewTravelDestinationAction(d))
   }
   chosen(c: TravelDestination){
     this.destinationsApiClient.choose(c);
-    this.store.dispatch(new ChosenTravelDestinationAction(c))
   }
 }

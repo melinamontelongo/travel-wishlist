@@ -16,7 +16,7 @@
     <hr class="mb-5">
     <div class="row row-flex">
         <app-travel-destination 
-        *ngFor="let d of destinationsApiClient.getAll(); let i=index" [destination]="d"
+        *ngFor="let d of all; let i=index" [destination]="d"
         [position]="i+1"
         (clicked)="chosen(d)"></app-travel-destination>
     </div>
