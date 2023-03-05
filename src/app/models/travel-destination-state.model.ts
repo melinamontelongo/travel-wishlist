@@ -25,14 +25,18 @@ export enum TravelDestinationActionTypes {
     NEW_DESTINATION = "New [Travel Destinations]",
     CHOSEN_AS_FAV = "[Travel Destinations] chosen as favorite",
     VOTE_UP = "[Travel Destinations] Vote Up",
-    VOTE_DOWN = "[Travel Destinations] Vote Down"
+    VOTE_DOWN = "[Travel Destinations] Vote Down",
+    DELETE_DESTINATION = "[Travel Destinations] Delete" 
 }
 
 export class NewTravelDestinationAction implements Action {
     type = TravelDestinationActionTypes.NEW_DESTINATION;
     constructor(public destination: TravelDestination) { };
 }
-
+export class DeleteTravelDestinationAction implements Action {
+    type = TravelDestinationActionTypes.DELETE_DESTINATION;
+    constructor(public destination: TravelDestination) { };
+}
 export class ChosenTravelDestinationAction implements Action {
     type = TravelDestinationActionTypes.CHOSEN_AS_FAV;
     constructor(public destination: TravelDestination) { };
@@ -48,7 +52,7 @@ export class VoteDownAction implements Action {
     constructor(public destination: TravelDestination) { };
 }
 
-export type TravelDestinationActions = NewTravelDestinationAction | ChosenTravelDestinationAction | VoteUpAction | VoteDownAction;
+export type TravelDestinationActions = NewTravelDestinationAction | DeleteTravelDestinationAction |ChosenTravelDestinationAction | VoteUpAction | VoteDownAction;
 
 //REDUCERS
 export function TravelDestinationReducer(
