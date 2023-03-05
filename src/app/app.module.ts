@@ -17,13 +17,25 @@ import { LoginComponent } from './components/login/login/login.component';
 import { ProtectedComponent } from './components/protected/protected/protected.component';
 import { LoggedUserGuard } from './guards/logged-user/logged-user.guard';
 import { AuthService } from './services/auth.service';
+import { FlightsComponentComponent } from './components/flights/flights-component/flights-component.component';
+import { FlightsMainComponentComponent } from './components/flights/flights-main-component/flights-main-component.component';
+import { FlightsInfoComponentComponent } from './components/flights/flights-info-component/flights-info-component.component';
+import { FlightsDetailsComponentComponent } from './components/flights/flights-details-component/flights-details-component.component';
+
+export const childrenRoutesFlights: Routes = [
+  { path: "", redirectTo: "main", pathMatch: "full" },
+  { path: "main", component: FlightsMainComponentComponent },
+  { path: "info", component: FlightsDetailsComponentComponent },
+  { path: ":id", component: FlightsDetailsComponentComponent }
+]
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: DestinationsListComponent },
   { path: 'destination', component: DestinationDetailComponent },
-  {path: "login", component: LoginComponent},
-  {path: "protected", component: ProtectedComponent, canActivate: [LoggedUserGuard]}
+  { path: "login", component: LoginComponent },
+  { path: "protected", component: ProtectedComponent, canActivate: [LoggedUserGuard] },
+  { path: "flights", component: FlightsComponentComponent, canActivate: [LoggedUserGuard], children: childrenRoutesFlights }
 ]
 
 //Redux init start
@@ -50,6 +62,10 @@ const reducersInitialState = {
     TravelDestinationFormComponent,
     LoginComponent,
     ProtectedComponent,
+    FlightsComponentComponent,
+    FlightsMainComponentComponent,
+    FlightsInfoComponentComponent,
+    FlightsDetailsComponentComponent,
 
   ],
   imports: [
@@ -57,7 +73,7 @@ const reducersInitialState = {
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
-    NgRxStoreModule.forRoot(reducers, { initialState: reducersInitialState} ),
+    NgRxStoreModule.forRoot(reducers, { initialState: reducersInitialState }),
     EffectsModule.forRoot([TravelDestinationEffects]),
     StoreDevtoolsModule.instrument()
   ],
