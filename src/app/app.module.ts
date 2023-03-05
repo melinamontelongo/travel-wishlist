@@ -21,6 +21,7 @@ import { FlightsComponentComponent } from './components/flights/flights-componen
 import { FlightsMainComponentComponent } from './components/flights/flights-main-component/flights-main-component.component';
 import { FlightsInfoComponentComponent } from './components/flights/flights-info-component/flights-info-component.component';
 import { FlightsDetailsComponentComponent } from './components/flights/flights-details-component/flights-details-component.component';
+import { BookingsModule } from './bookings/bookings.module';
 
 export const childrenRoutesFlights: Routes = [
   { path: "", redirectTo: "main", pathMatch: "full" },
@@ -75,7 +76,8 @@ const reducersInitialState = {
     RouterModule.forRoot(routes),
     NgRxStoreModule.forRoot(reducers, { initialState: reducersInitialState }),
     EffectsModule.forRoot([TravelDestinationEffects]),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    BookingsModule
   ],
   providers: [
     DestinationsApiClient,
