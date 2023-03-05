@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export class TravelDestination{
-    private selected!: boolean;
+    private selected: boolean;
     public services: string[];
     public id: string;
     constructor(public name: string, public url: string, public description: string){

@@ -9,12 +9,31 @@ import { DestinationsListComponent } from './destinations-list/destinations-list
 import { DestinationDetailComponent } from './destination-detail/destination-detail.component';
 import { TravelDestinationFormComponent } from './travel-destination-form/travel-destination-form.component';
 import { DestinationsApiClient } from './models/destinations-api-client.model';
+import { initializeTravelDestinationState, TravelDestinationEffects, TravelDestinationReducer, TravelDestinationState } from './models/travel-destination-state.model';
+import { ActionReducerMap, StoreModule as NgRxStoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: DestinationsListComponent },
   { path: 'destination', component: DestinationDetailComponent },
 ]
+
+//Redux init start
+export interface AppState {
+  destinations: TravelDestinationState;
+}
+
+const reducers: ActionReducerMap<AppState> = {
+  destinations: TravelDestinationReducer
+}
+
+const reducersInitialState = {
+  destinations: initializeTravelDestinationState()
+}
+
+//Redux init end
 
 @NgModule({
   declarations: [
@@ -29,7 +48,10 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgRxStoreModule.forRoot(reducers, { initialState: reducersInitialState} ),
+    EffectsModule.forRoot([TravelDestinationEffects]),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [
     DestinationsApiClient
