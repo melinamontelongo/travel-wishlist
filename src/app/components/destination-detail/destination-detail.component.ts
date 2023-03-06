@@ -42,7 +42,24 @@ class DestinationsApiClientDecorated extends DestinationsApiClient{
 })
 export class DestinationDetailComponent {
  destination: TravelDestination
-
+  style = {
+    sources:{
+      world: {
+        type: "geojson",
+        data: "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json"
+      }
+    },
+    version: 0,
+    layers: [{
+      "id": "countries",
+      "type": "fill",
+      "source": "world",
+      "layout": {},
+      "paint": {
+        "fill-color": "#6F788A"
+      }
+    }]
+  };
  constructor(private route: ActivatedRoute, private destinationsApiClient: DestinationsApiClient/* DestinationsApiClientOld */ ) {}
 
  ngOnInit(){

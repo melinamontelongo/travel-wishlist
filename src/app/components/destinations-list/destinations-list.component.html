@@ -18,7 +18,10 @@
         <app-travel-destination 
         *ngFor="let d of all; let i=index" [destination]="d"
         [position]="i+1"
-        (clicked)="chosen(d)"></app-travel-destination>
+        (click)="chosen(d)"
+        appEspiame
+        >
+    </app-travel-destination>
     </div>
     <hr class="mb-5">
     <div class="row row-flex">

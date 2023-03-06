@@ -17,6 +17,8 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { HttpClient, HttpClientModule, HttpHeaders, HttpRequest } from "@angular/common/http";
 import Dexie from "dexie";
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core/public_api';
+import { NgxMapboxGLModule } from "ngx-mapbox-gl"
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 
 import { LoginComponent } from './components/login/login/login.component';
 import { ProtectedComponent } from './components/protected/protected/protected.component';
@@ -29,6 +31,8 @@ import { FlightsDetailsComponentComponent } from './components/flights/flights-d
 import { BookingsModule } from './bookings/bookings.module';
 import { TravelDestination } from './models/travel-destination.model';
 import { flatMap, from, Observable } from 'rxjs';
+import { EspiameDirective } from './espiame.directive';
+import { TrackClickDirective } from './track-click.directive';
 
 //init routing
 export const childrenRoutesFlights: Routes = [
@@ -163,6 +167,8 @@ class AppLoadService {
     FlightsMainComponentComponent,
     FlightsInfoComponentComponent,
     FlightsDetailsComponentComponent,
+    EspiameDirective,
+    TrackClickDirective,
 
   ],
   imports: [
@@ -181,7 +187,9 @@ class AppLoadService {
         useFactory: (HttpLoaderFactory),
         deps: [HttpClient]
       }
-    })
+    }),
+    NgxMapboxGLModule,
+    BrowserAnimationsModule
   ],
   providers: [
     /* DestinationsApiClient, */
