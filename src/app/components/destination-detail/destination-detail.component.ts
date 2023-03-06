@@ -4,7 +4,7 @@ import { AppState } from 'src/app/app.module';
 import { DestinationsApiClient } from 'src/app/models/destinations-api-client.model';
 import { TravelDestination } from 'src/app/models/travel-destination.model';
 import { Store } from "@ngrx/store";
-class DestinationsApiClientOld{
+/* class DestinationsApiClientOld{
   getById(id: string): TravelDestination{
     console.log("calling old class");
     return null;
@@ -17,8 +17,8 @@ interface AppConfig{
 const APP_CONFIG_VALUE: AppConfig = {
   apiEndpoint: "my_api.com"
 };
-const APP_CONFIG = new InjectionToken<AppConfig>("app.config");
-@Injectable()
+const APP_CONFIG = new InjectionToken<AppConfig>("app.config"); */
+/* @Injectable()
 class DestinationsApiClientDecorated extends DestinationsApiClient{
   constructor(@Inject(APP_CONFIG) private config: AppConfig, store: Store<AppState>){
     super(store);
@@ -28,22 +28,22 @@ class DestinationsApiClientDecorated extends DestinationsApiClient{
     console.log("config: " + this.config.apiEndpoint);
     return super.getById(id);
   }
-}
+} */
 
 @Component({
   selector: 'app-destination-detail',
   templateUrl: './destination-detail.component.html',
   styleUrls: ['./destination-detail.component.css'],
-  providers: [
-    {provide: APP_CONFIG, useValue: APP_CONFIG_VALUE},
+  providers: [DestinationsApiClient
+/*     {provide: APP_CONFIG, useValue: APP_CONFIG_VALUE},
     {provide: DestinationsApiClient, useClass: DestinationsApiClientDecorated},
-    {provide: DestinationsApiClientOld, useExisting: DestinationsApiClient}
+    {provide: DestinationsApiClientOld, useExisting: DestinationsApiClient} */
   ]
 })
 export class DestinationDetailComponent {
  destination: TravelDestination
 
- constructor(private route: ActivatedRoute, private destinationsApiClient: DestinationsApiClientOld ) {}
+ constructor(private route: ActivatedRoute, private destinationsApiClient: DestinationsApiClient/* DestinationsApiClientOld */ ) {}
 
  ngOnInit(){
   let id = this.route.snapshot.paramMap.get("id");

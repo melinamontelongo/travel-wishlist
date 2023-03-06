@@ -1,5 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
+    
+    <div style="float: right">
+      <select (change)="translate.use($any($event).target.value)">
+        <option value="es">Español</option>
+        <option value="fr">French</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+    <h1>{{ title }} <b [innerHTML]="'HELLO' | translate"></b></h1>
+    
     <span class="navbar-brand mb-0 h1">My Travel Wishlist</span>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

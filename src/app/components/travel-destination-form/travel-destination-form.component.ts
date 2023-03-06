@@ -1,9 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, forwardRef, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { TravelDestination } from '../../models/travel-destination.model';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
+import { AppConfig, APP_CONFIG } from 'src/app/app.module';
 
 @Component({
   selector: 'app-travel-destination-form',
@@ -16,7 +17,7 @@ export class TravelDestinationFormComponent implements OnInit{
   minLength = 3;
   searchResults: string[] = [];
 
-  constructor(fb: FormBuilder) { 
+  constructor(fb: FormBuilder, @Inject(forwardRef(() => APP_CONFIG)) private config: AppConfig) { 
     this.onItemAdded = new EventEmitter();
     this.fg = fb.group({
       name: ['', Validators.compose([
@@ -39,7 +40,7 @@ export class TravelDestinationFormComponent implements OnInit{
         filter(text => text.length >= 4),
         debounceTime(200),
         distinctUntilChanged(),
-        switchMap(() => ajax("/assets/data.json"))
+        switchMap((text: string) => ajax(this.config.apiEndpoint + "/cities?q=" + text))
       ).subscribe(ajaxResponse => {
         this.searchResults = ajaxResponse.response as string[];
       })

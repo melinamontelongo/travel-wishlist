@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
 import { TravelDestination } from "./travel-destination.model";
+import { HttpClientModule } from "@angular/common/http";
 
 //STATE
 export interface TravelDestinationState {
@@ -26,7 +27,8 @@ export enum TravelDestinationActionTypes {
     CHOSEN_AS_FAV = "[Travel Destinations] chosen as favorite",
     VOTE_UP = "[Travel Destinations] Vote Up",
     VOTE_DOWN = "[Travel Destinations] Vote Down",
-    DELETE_DESTINATION = "[Travel Destinations] Delete" 
+    DELETE_DESTINATION = "[Travel Destinations] Delete",
+    INIT_MY_DATA = "[Travel Destinations] Init My Data"
 }
 
 export class NewTravelDestinationAction implements Action {
@@ -52,7 +54,11 @@ export class VoteDownAction implements Action {
     constructor(public destination: TravelDestination) { };
 }
 
-export type TravelDestinationActions = NewTravelDestinationAction | DeleteTravelDestinationAction |ChosenTravelDestinationAction | VoteUpAction | VoteDownAction;
+export class InitMyDataAction implements Action {
+    type = TravelDestinationActionTypes.INIT_MY_DATA;
+    constructor(public destinations: string[]){}
+}
+export type TravelDestinationActions = NewTravelDestinationAction | DeleteTravelDestinationAction |ChosenTravelDestinationAction | VoteUpAction | VoteDownAction | InitMyDataAction;
 
 //REDUCERS
 export function TravelDestinationReducer(
@@ -84,6 +90,13 @@ export function TravelDestinationReducer(
             const d: TravelDestination = (action as VoteDownAction).destination;
             d.voteDown();
             return { ...state };
+        }
+        case TravelDestinationActionTypes.INIT_MY_DATA: {
+            const destinations: string[] = (action as InitMyDataAction).destinations;
+            return{
+                ...state,
+                items: destinations.map((d) => new TravelDestination(d, "", ""))
+            }
         }
         default:
             return state;
