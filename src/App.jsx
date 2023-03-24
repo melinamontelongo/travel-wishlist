@@ -1,0 +1,31 @@
+
+import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { Navbar } from './components/Navbar';
+import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+//  Pages
+import { Index } from './pages/Index';
+import { About } from './pages/About';
+import { Start } from './pages/Start';
+import { Explore } from './pages/Explore';
+
+function App() {
+
+  return (
+    <div className="App">
+      <Navbar />
+      <ToastContainer position="top-center"
+        closeOnClick
+        theme="dark" />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/start" element={<Start />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </div>
+  )
+}
+
+export default App;
