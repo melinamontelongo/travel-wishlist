@@ -5,3 +5,6 @@ A web app built with React, where you can save the places you want to visit alon
 
 ## Tools
 Redux Toolkit, React Router, Framer Motion, React Leaflet, React Icons, React Toastify, Tailwindcss.
+
+## Try it!
+https://melinamontelongo.github.io/travel-wishlist/
