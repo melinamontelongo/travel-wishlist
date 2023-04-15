@@ -13,6 +13,7 @@ import { WishlistForm } from "./../components/WishlistForm";
 import { Card } from "./../components/Card";
 import { UnsplashCredit } from '../components/UnsplashCredit';
 import { Modal } from '../components/Modal';
+import { Divider } from '../components/Divider';
 
 export const Start = () => {
     const dispatch = useDispatch();
@@ -66,51 +67,49 @@ export const Start = () => {
         updateModal.current.classList.add("hidden");
     }
     return (
+            <div className="grid place-items-center items-center pt-20 ">
+                <h1 className="text-center font-['Lobster'] text-5xl mb-4">The destinations of your dreams</h1>
+                <div className="w-1/2"><Divider /></div>
+                <WishlistForm handleSubmit={handleAdd} />
 
-        <div className="grid place-items-center items-center mt-20">
-            <h1 className="text-center font-['Lobster'] text-5xl mb-4">The destinations of your dreams</h1>
-            <hr className="border border-pink-500 w-1/2 mb-4 mt-2" />
-            <WishlistForm handleSubmit={handleAdd} />
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 w-3/4 pb-10 ">
 
-            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 w-3/4 pb-10 ">
-
-                {wishlist.map((destination, i) => {
-                    return (
-                        <Card
-                            key={i}
-                            id={destination.id}
-                            icons={<>
-                                <div className="rounded-full bg-zinc-800 hover:bg-zinc-700 w-full h-full p-2 transition duration-300">
-                                    <FaRegEdit className="text-2xl" onClick={() => triggerUpdateModal(destination.id)} />
-                                </div>
-                                <div className="rounded-full bg-zinc-800 hover:bg-zinc-700 w-full h-full p-2 transition duration-300">
-                                    <MdDelete className="text-2xl" onClick={() => handleDelete(destination.id)} />
-                                </div>
-                            </>}
-                            title={destination.name}
-                            body={destination.description}
-                            image={<>
-                                <img className="w-full h-2/4 object-cover" src={destination.picture ? destination.picture.img : "./fallback.png"} alt="Destination image" />
-                            </>}
-                            footer={<>
-                                {destination.picture && <UnsplashCredit photographer={destination.picture.photographer} />}
-                            </>}
-                        />
-                    )
-                })}
+                    {wishlist.map((destination, i) => {
+                        return (
+                            <Card
+                                key={i}
+                                id={destination.id}
+                                icons={<>
+                                    <div className="rounded-full bg-zinc-600/20 hover:bg-zinc-700/50 backdrop-blur w-full h-full p-2 transition duration-300">
+                                        <FaRegEdit className="text-2xl" onClick={() => triggerUpdateModal(destination.id)} />
+                                    </div>
+                                    <div className="rounded-full bg-zinc-600/20 hover:bg-zinc-700/50 backdrop-blur w-full h-full p-2 transition duration-300">
+                                        <MdDelete className="text-2xl" onClick={() => handleDelete(destination.id)} />
+                                    </div>
+                                </>}
+                                title={destination.name}
+                                body={destination.description}
+                                image={<>
+                                    <img className="w-full h-2/4 object-cover" src={destination.picture ? destination.picture.img : "./fallback.png"} alt="Destination image" />
+                                </>}
+                                footer={<>
+                                    {destination.picture && <UnsplashCredit photographer={destination.picture.photographer} />}
+                                </>}
+                            />
+                        )
+                    })}
+                </div>
+                {/* MODAL TO EDIT A CARD START*/}
+                <Modal
+                    modalRef={updateModal}
+                    body={
+                        <WishlistForm
+                            isUpdate={isUpdate}
+                            closeUpdateModal={closeUpdateModal}
+                            destinationToEdit={chosenDestination}
+                            handleSubmit={handleUpdate}
+                        />}
+                />
             </div>
-            {/* MODAL TO EDIT A CARD START*/}
-            <Modal
-                modalRef={updateModal}
-                body={
-                    <WishlistForm 
-                        isUpdate={isUpdate}
-                        closeUpdateModal={closeUpdateModal}
-                        destinationToEdit={chosenDestination}
-                        handleSubmit={handleUpdate}
-                    />}
-            />
-        </div>
-
     )
 }

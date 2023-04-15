@@ -4,7 +4,7 @@ export const Card = ({ id, icons, image, title, body, footer }) => {
     return (
         <AnimatePresence>
                 <motion.div key={id} initial={{ x: 5, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -5, opacity: 0 }} transition={{ ease: [0.17, 0.67, 0.83, 0.67] }}
-                    className="group relative max-w-sm max-h-96 rounded overflow-y-auto shadow-lg bg-zinc-800 hover:bg-zinc-700 transition duration-300"
+                    className="group relative max-w-sm max-h-96 rounded overflow-y-auto shadow-xl bg-zinc-600/20 hover:bg-zinc-700/50 backdrop-blur transition duration-300"
                     id={id}>
                     <div className="absolute right-0 top-0 flex gap-2 m-2 invisible group-hover:visible">
                         {icons}

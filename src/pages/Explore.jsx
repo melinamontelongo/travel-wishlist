@@ -12,6 +12,7 @@ import { ExploreForm } from "../components/ExploreForm";
 import { Card } from "../components/Card";
 import { Modal } from "../components/Modal";
 import { Map } from "../components/Map";
+import { Divider } from "../components/Divider";
 
 export const Explore = () => {
     const dispatch = useDispatch();
@@ -68,7 +69,7 @@ export const Explore = () => {
     return (
         <div className="grid place-items-center items-center mt-20">
             <h1 className="text-center font-['Lobster'] text-5xl mb-4">Find new destinations</h1>
-            <hr className="border border-pink-500 w-1/2 mb-4 mt-2" />
+            <div className="w-1/2"><Divider /></div>
             <ExploreForm handleSearch={searchItems} />
             <div className="flex flex-wrap gap-4 justify-center mb-10">
                 {exploreItems.length > 0 ? exploreItems.map((item, i) => {

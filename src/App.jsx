@@ -1,5 +1,5 @@
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Navbar } from './components/Navbar';
 import './App.css';
@@ -9,8 +9,17 @@ import { Index } from './pages/Index';
 import { About } from './pages/About';
 import { Start } from './pages/Start';
 import { Explore } from './pages/Explore';
+import { useEffect } from 'react';
 
-function App() {
+import { backgroundConfig } from './utils/backgroundConfig';
+
+const App = () => {
+
+  const location = useLocation();
+  //  Change bg image depending on path
+  useEffect(() => {
+    document.body.style.backgroundImage = `url(${backgroundConfig[location.pathname]})`
+  }, [location]);
 
   return (
     <div className="App">

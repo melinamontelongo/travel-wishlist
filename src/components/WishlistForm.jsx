@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { SearchModal } from "./SearchModal";
 import { toast } from 'react-toastify';
+import { Button } from "./Button";
 
 const ACCESS_KEY = import.meta.env.VITE_REACT_APP_ACCESS_KEY;
 
@@ -83,24 +84,16 @@ export const WishlistForm = ({ isUpdate, closeUpdateModal = undefined, handleSub
                 <h2 className="text-4xl text-center font-['Lobster'] mb-4">{isUpdate ? "Edit this destination" : "Add a new destination"}</h2>
                 <div className="mb-6 grid">
                     <label htmlFor="destName" className="mb-2 text-3xl font-['Lobster_Two']">Destination:</label>
-                    <input id="destName" required type="text" className="text-lg font-['Cutive_Mono'] shadow shadow-pink-500/50 p-2 border border-pink-500 outline-0 rounded caret-pink-500 bg-zinc-700" name="name" placeholder="Enter destination's name" defaultValue={destinationToEdit ? destinationToEdit.name : ""} key={destinationToEdit ? destinationToEdit.name : ""}></input>
+                    <input id="destName" required type="text" className="text-lg font-['Cutive_Mono'] shadow shadow-orange-500/50 p-2 border border-orange-300 outline-0 rounded caret-orange-500 bg-zinc-600/20 placeholder:text-zinc-300 backdrop-blur" name="name" placeholder="Enter destination's name" defaultValue={destinationToEdit ? destinationToEdit.name : ""} key={destinationToEdit ? destinationToEdit.name : ""}></input>
                 </div>
                 <div className="mb-6 grid">
                     <label htmlFor="destDesc" className="mb-2 text-3xl font-['Lobster_Two']">Description:</label>
-                    <textarea id="destDesc" required className="text-lg font-['Cutive_Mono'] shadow shadow-pink-500/50 p-2 border border-pink-500 outline-0 rounded caret-pink-500 bg-zinc-700" name="description" placeholder="Enter destination's description" defaultValue={destinationToEdit ? destinationToEdit.description : ""} key={destinationToEdit ? destinationToEdit.description : ""}></textarea>
+                    <textarea id="destDesc" required className="text-lg font-['Cutive_Mono'] shadow shadow-orange-500/50 p-2 border border-orange-300 outline-0 rounded caret-orange-500 bg-zinc-600/20 placeholder:text-zinc-300 backdrop-blur" name="description" placeholder="Enter destination's description" defaultValue={destinationToEdit ? destinationToEdit.description : ""} key={destinationToEdit ? destinationToEdit.description : ""}></textarea>
                 </div>
-                <div className={`font-['Cutive_Mono'] text-xl grid gap-4 ${isUpdate ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
-                    <button type="button" className="bg-pink-500 p-1 md:p-1.5 mx-2 shadow-lg shadow-pink-500/50 hover:bg-pink-600 hover:shadow-pink-600/50 transition-colors rounded" onClick={openModal}>
-                        {isUpdate ? "Change image" : "Choose an image"}
-                    </button>
-                    <button type="submit" className="bg-pink-500 p-1 md:p-1.5 mx-2 shadow-lg shadow-pink-500/50 hover:bg-pink-600 hover:shadow-pink-600/50 transition-colors rounded" >
-                        {isUpdate ? "Save" : "Add"}
-                    </button>
-                    {isUpdate && (
-                        <button type="button" className="bg-pink-500 p-1 md:p-1.5 mx-2 shadow-lg shadow-pink-500/50 hover:bg-pink-600 hover:shadow-pink-600/50 transition-colors rounded" onClick={closeUpdateModal}>
-                            Cancel
-                        </button>
-                    )}
+                <div className={`grid gap-4 ${isUpdate ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
+                    <Button type="button" handleOnClick={openModal}>{isUpdate ? "Change image" : "Choose an image"}</Button>
+                    <Button type="submit">{isUpdate ? "Save" : "Add"}</Button>
+                    {isUpdate && <Button handleOnClick={closeUpdateModal} type="button">Cancel</Button>}
                 </div>
             </form>
             {/* END FORM */}
